@@ -1,0 +1,24 @@
+// user.proto
+syntax = "proto3";
+
+package user;
+
+option go_package = "./pb";
+
+service ServiceA {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+}
+
+service ServiceB {
+  rpc GetUserDetails (GetUserRequest) returns (GetUserResponse) {}
+}
+
+message GetUserRequest {
+  int32 user_id = 1;
+}
+
+message GetUserResponse {
+  int32 user_id = 1;
+  string name = 2;
+  string email = 3;
+}

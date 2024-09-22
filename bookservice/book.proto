@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package book;
+option go_package="./book";
+
+message AddRequest {
+  string title = 1;
+  string author = 2;
+  string publish_date = 3;
+}
+
+message AddResponse {
+  int64 id = 1;
+}
+
+message ListRequest {
+
+}
+
+message ListItem {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string publish_date = 4;
+}
+
+message ListResponse {
+  repeated ListItem items = 1;
+}
+
+message GetRequest {
+  int64 id = 1;
+}
+
+message GetResponse {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string publish_date = 4;
+}
+
+message EditRequest {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string publish_date = 4;
+}
+
+message EditResponse {
+
+}
+
+message DeleteRequest {
+  int64 id = 1;
+}
+
+message DeleteResponse {
+
+}
+
+service Book {
+  rpc Add(AddRequest) returns(AddResponse);
+  rpc List(ListRequest) returns(ListResponse);
+  rpc Get(GetRequest) returns(GetResponse);
+  rpc Edit(EditRequest) returns(EditResponse);
+  rpc Delete(DeleteRequest) returns(DeleteResponse);
+}

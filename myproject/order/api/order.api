@@ -1,0 +1,31 @@
+type (
+	CreateOrderReq {
+		UserId int64       `json:"userId"`
+		Items  []OrderItem `json:"items"`
+	}
+	OrderItem {
+		ProductId int64 `json:"productId"`
+		Quantity  int32 `json:"quantity"`
+	}
+	CreateOrderResp {
+		OrderId int64 `json:"orderId"`
+	}
+	GetOrderReq {
+		OrderId int64 `path:"orderId"`
+	}
+	GetOrderResp {
+		OrderId int64       `json:"orderId"`
+		UserId  int64       `json:"userId"`
+		Items   []OrderItem `json:"items"`
+		Status  string      `json:"status"`
+	}
+)
+
+service order-api {
+	@handler CreateOrder
+	post /orders (CreateOrderReq) returns (CreateOrderResp)
+
+	@handler GetOrder
+	get /orders/:orderId (GetOrderReq) returns (GetOrderResp)
+}
+

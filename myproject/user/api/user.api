@@ -1,0 +1,26 @@
+type (
+	GetUserReq {
+		Id int64 `path:"id"`
+	}
+	GetUserResp {
+		Id    int64  `json:"id"`
+		Name  string `json:"name"`
+		Email string `json:"email"`
+	}
+	CreateUserReq {
+		Name  string `json:"name"`
+		Email string `json:"email"`
+	}
+	CreateUserResp {
+		Id int64 `json:"id"`
+	}
+)
+
+service user-api {
+	@handler GetUser
+	get /users/:id (GetUserReq) returns (GetUserResp)
+
+	@handler CreateUser
+	post /users (CreateUserReq) returns (CreateUserResp)
+}
+

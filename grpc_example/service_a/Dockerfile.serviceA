@@ -1,0 +1,25 @@
+FROM golang:1.22.5
+
+# 设置工作目录为项目根目录
+WORKDIR /app
+
+# 首先复制根目录的 go.mod 和 go.sum（如果存在）
+COPY go.mod go.sum* ./
+
+# 复制 service_a 的 go.mod 和 go.sum
+COPY service_a/go.mod service_a/go.sum* ./service_a/
+
+# 下载依赖
+RUN go mod download
+
+# 复制整个项目代码
+COPY . .
+
+# 切换到 service_a 目录
+WORKDIR /app/service_a
+
+# 构建应用
+RUN go build -o service_a .
+
+# 运行应用
+CMD ["./service_a"]

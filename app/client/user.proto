@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./user";
+
+service User {
+  rpc GetUserDetails(GetUserDetailsRequest) returns (GetUserDetailsResponse);
+}
+
+message GetUserDetailsRequest {
+  int64 userID = 1;
+}
+
+message GetUserDetailsResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
